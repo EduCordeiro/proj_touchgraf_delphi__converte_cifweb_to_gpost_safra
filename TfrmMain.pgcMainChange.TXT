@@ -1,0 +1,32 @@
+procedure TfrmMain.pgcMainChange(Sender: TObject);
+var
+  ListaDeArquivosSelecionados : TStrings;
+  iContArquivosSelecionados   : Integer;
+begin
+
+  ListaDeArquivosSelecionados := TStrings.Create();
+
+  ListaDeArquivosSelecionados:= TStringList.Create();
+  for iContArquivosSelecionados:= 0 to cltArquivos.Count - 1 do
+    if cltArquivos.Checked[iContArquivosSelecionados] then
+      ListaDeArquivosSelecionados.Add(cltArquivos.Items[iContArquivosSelecionados]);
+
+
+  if pgcMain.TabIndex <> 0 then
+  Begin
+
+    if ListaDeArquivosSelecionados.Count = 0 then
+    begin
+      ShowMessage(IntToStr(ListaDeArquivosSelecionados.Count) + ' arquivo selecionados.');
+      pgcMain.TabIndex  := 0;
+    end
+    else
+    if pgcMain.TabIndex = 2 then
+        case MessageBox (Application.Handle, Pchar ('CONFIRMAÇÃO !'+#13#10#13#10+ IntToStr(ListaDeArquivosSelecionados.Count) + ' arquivo selecionados.' + #13 + 'Deseja continuar?'),
+         'Abrir pasta de saída', MB_YESNO) of
+          IDNO: pgcMain.TabIndex  := 0;
+        end;
+
+  end;
+
+end;
