@@ -199,7 +199,9 @@ begin
       objParametrosDeEntrada.CODIGO_AVALIACAO_TECNICA_CB7               := objArquivoDeConfiguracao.getConfiguracao('CODIGO_AVALIACAO_TECNICA_CB7');
       objParametrosDeEntrada.DNE_ATUALIZADO                             := objArquivoDeConfiguracao.getConfiguracao('DNE_ATUALIZADO');
       objParametrosDeEntrada.NUMERO_CARTAO                              := objArquivoDeConfiguracao.getConfiguracao('NUMERO_CARTAO');
-      objParametrosDeEntrada.CODIGO_MUTIPLO                             := objArquivoDeConfiguracao.getConfiguracao('CODIGO_MUTIPLO');
+      objParametrosDeEntrada.CODIGO_MULTIPLO_BACEN                      := objArquivoDeConfiguracao.getConfiguracao('CODIGO_MULTIPLO_BACEN');
+      objParametrosDeEntrada.CODIGO_MULTIPLO_CCB                        := objArquivoDeConfiguracao.getConfiguracao('CODIGO_MULTIPLO_CCB');
+      objParametrosDeEntrada.CODIGO_MULTIPLO_CB7                        := objArquivoDeConfiguracao.getConfiguracao('CODIGO_MULTIPLO_CB7');
       objParametrosDeEntrada.CODIGO_CONTEUDO                            := objArquivoDeConfiguracao.getConfiguracao('CODIGO_CONTEUDO');
       objParametrosDeEntrada.CODIGO_SERVICO_ADICIONAL                   := objArquivoDeConfiguracao.getConfiguracao('CODIGO_SERVICO_ADICIONAL');
       objParametrosDeEntrada.VALOR_DECLARADO                            := objArquivoDeConfiguracao.getConfiguracao('VALOR_DECLARADO');
@@ -1133,6 +1135,8 @@ var
 
   sNumeroCartao                     : string;
 
+  sCodigoDeMultiplo                 : string;
+
   sArquivoPdfOrigem                 : string;
   sTipoArquivoPdfOrigem             : string;
   sTipoArquivoOrigem_Bacen_CCB_CB7  : string;
@@ -1289,11 +1293,13 @@ begin
       //============================================================================================================
       sCODIGO_AVALIACAO_TECNICA         := objParametrosDeEntrada.CODIGO_AVALIACAO_TECNICA_CCB;
       sTipoArquivoOrigem_Bacen_CCB_CB7  := 'CCB';
+      sCodigoDeMultiplo                 := objParametrosDeEntrada.CODIGO_MULTIPLO_CCB;
 
       if pos('CB7', sArquivoEntrada) > 0 then
       BEGIN
         sCODIGO_AVALIACAO_TECNICA        := objParametrosDeEntrada.CODIGO_AVALIACAO_TECNICA_CB7;
         sTipoArquivoOrigem_Bacen_CCB_CB7 := 'CB7';
+        sCodigoDeMultiplo                := objParametrosDeEntrada.CODIGO_MULTIPLO_CB7;
       END;
 
 
@@ -1301,6 +1307,7 @@ begin
       BEGIN
         sCODIGO_AVALIACAO_TECNICA        := objParametrosDeEntrada.CODIGO_AVALIACAO_TECNICA_BACEN;
         sTipoArquivoOrigem_Bacen_CCB_CB7 := 'BACEN';
+        sCodigoDeMultiplo                := objParametrosDeEntrada.CODIGO_MULTIPLO_BACEN;
       END;
       //============================================================================================================
 
@@ -1361,7 +1368,7 @@ begin
                                          + sLoteFAC
                                          + sSequenciaOBJ
                                          + sCodigoDestino
-                                         + objParametrosDeEntrada.CODIGO_MUTIPLO
+                                         + sCodigoDeMultiplo
                                          + sDataPostagem;
 
       sLinha := StringReplace(sLinha, sCIF_WEB, sCIF_GPOST, [rfReplaceAll, rfIgnoreCase]);
@@ -1429,7 +1436,7 @@ begin
                   + '","' + sSequenciaOBJ
                   + '","' + sPeso
                   + '","' + sCodigoServico
-                  + '","' + objParametrosDeEntrada.CODIGO_MUTIPLO
+                  + '","' + sCodigoDeMultiplo
                   + '","' + objParametrosDeEntrada.CODIGO_CONTEUDO
                   + '","' + objParametrosDeEntrada.CODIGO_SERVICO_ADICIONAL
                   + '","' + objParametrosDeEntrada.VALOR_DECLARADO

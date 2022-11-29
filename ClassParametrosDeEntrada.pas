@@ -113,7 +113,9 @@ interface
 
 
       NUMERO_CARTAO                              : STRING;
-      CODIGO_MUTIPLO                             : STRING;
+      CODIGO_MULTIPLO_BACEN                      : STRING;
+      CODIGO_MULTIPLO_CCB                        : STRING;
+      CODIGO_MULTIPLO_CB7                        : STRING;
       CODIGO_CONTEUDO                            : STRING;
       CODIGO_SERVICO_ADICIONAL                   : STRING;
       VALOR_DECLARADO                            : STRING;
