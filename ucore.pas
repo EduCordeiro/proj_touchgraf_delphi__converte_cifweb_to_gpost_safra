@@ -1490,7 +1490,7 @@ begin
                        + '","' + sDataPostagem
                        + '","' + sLoteFAC
                        + '","' + sCIF_GPOST
-                       + '","' + IntToStr(iTotalPeso)
+                       + '","' + sPeso
                        + '","' + sCodigoDestino
                        + '","' + sCodigoServico
                        + '","' + ''
